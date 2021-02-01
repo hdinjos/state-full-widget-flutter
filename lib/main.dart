@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,7 +51,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController dateCtl = TextEditingController();
+  String dateWaw = DateTime.now().toIso8601String();
+  // DateTime selectedDate = DateTime.now();
   int _counter = 0;
+
+  // _selectDate(BuildContext context) async {
+  //   final DateTime picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: selectedDate,
+  //     firstDate: DateTime(2000),
+  //     lastDate: DateTime(2025),
+  //   );
+  //   if (picked != null && picked != selectedDate)
+  //     setState(() {
+  //       selectedDate = picked;
+  //     });
+  // }
 
   void _incrementCounter() {
     setState(() {
@@ -103,17 +120,46 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            RaisedButton(
-              onPressed: _resetCounter,
-              child: Text('Reset'),
+            TextFormField(
+              // initialValue: this.dateWaw,
+              controller: dateCtl,
+              decoration: InputDecoration(
+                labelText: "Date of birth",
+                hintText: "Ex. Insert your dob",
+              ),
+              onTap: () async {
+                DateTime date = DateTime(1900);
+                FocusScope.of(context).requestFocus(new FocusNode());
+
+                date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime(2100));
+
+                dateCtl.text = DateFormat('dd MMMM yyyy').format(date);
+                this.setState(() {
+                  this.dateWaw = date.toIso8601String();
+                });
+              },
             )
+
+            // Text(
+            //   "${selectedDate.toLocal()}".split(' ')[0],
+            //   style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
+            // ),
+            // SizedBox(
+            //   height: 20.0,
+            // ),
+            // RaisedButton(
+            //   onPressed: () => _selectDate(context), // Refer step 3
+            //   child: Text(
+            //     'Pick Date',
+            //     style:
+            //         TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            //   ),
+            //   color: Colors.black,
+            // ),
           ],
         ),
       ),
