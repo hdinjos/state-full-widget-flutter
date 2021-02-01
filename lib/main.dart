@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,7 +52,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  final List<Map<String, dynamic>> _items = [
+    {
+      'value': 'boxValue',
+      'label': 'Box Label',
+      'icon': Icon(Icons.stop),
+    },
+    {
+      'value': 'circleValue',
+      'label': 'Circle Label',
+      'icon': Icon(Icons.fiber_manual_record),
+      'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'starValue',
+      'label': 'Star Label',
+      'enable': false,
+      'icon': Icon(Icons.grade),
+    },
+  ];
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -102,17 +121,14 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            RaisedButton(
-              onPressed: _resetCounter,
-              child: Text('Reset'),
+          children: [
+            SelectFormField(
+              initialValue: 'circle',
+              icon: Icon(Icons.format_shapes),
+              labelText: 'Shape',
+              items: _items,
+              onChanged: (val) => print(val),
+              // onSaved: (val) => print(val),
             )
           ],
         ),
