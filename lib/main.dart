@@ -26,13 +26,15 @@ class HomeScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all()),
             ),
-            Image.asset(
-              "assets/images/walking_out.png",
-              width: 150,
-              height: 150,
-              color: Colors.grey,
-              colorBlendMode: BlendMode.hue,
-              fit: BoxFit.cover,
+            ClipOval(
+              child: Image(
+                image: AssetImage("assets/images/walking_out.png"),
+                width: 150,
+                height: 150,
+                color: Colors.grey,
+                colorBlendMode: BlendMode.hue,
+                fit: BoxFit.cover,
+              ),
             ),
             CachedNetworkImage(
               color: Colors.grey,
