@@ -12,25 +12,26 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Stack"),
         ),
-        body: Stack(
+        body: IndexedStack(
+          index: 2,
           children: [
             Container(
               color: Colors.red,
             ),
-            Positioned(
-              right: 40,
-              top: 20,
-              child: Container(
-                width: 300,
-                height: 400,
-                color: Colors.blue,
-              ),
-            ),
             Align(
               alignment: Alignment.center,
               child: Container(
-                width: 130,
-                height: 130,
+                width: 250,
+                height: 150,
+                color: Colors.blueAccent,
+              ),
+            ),
+            Positioned(
+              left: 50,
+              bottom: 200,
+              child: Container(
+                width: 180,
+                height: 150,
                 color: Colors.amber,
               ),
             ),
