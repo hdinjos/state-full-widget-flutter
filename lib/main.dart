@@ -26,18 +26,35 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("List View Builder"),
         ),
-        body: ListView.builder(
+        body: ListView.separated(
+          padding: EdgeInsets.all(10),
           itemBuilder: (context, index) {
             return Card(
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.all(20),
                 child: Text(
                   bulan[index],
                   style: TextStyle(fontSize: 30),
                 ),
               ),
             );
-            // return Text(bulan[index]);
+          },
+          separatorBuilder: (context, position) {
+            if ((position + 1) % 5 == 0) {
+              return Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(15),
+                color: Colors.blueAccent,
+                child: Text(
+                  "Space Iklan",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              );
+            } else {
+              return Container();
+            }
           },
           itemCount: bulan.length,
         ),
