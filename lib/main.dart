@@ -29,11 +29,18 @@ class HomeScreen extends StatelessWidget {
         body: ListView.builder(
           itemBuilder: (context, index) {
             return Card(
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Text(
+              child: ListTile(
+                // contentPadding: EdgeInsets.only(top: 0, bottom: 0),
+                title: Text(
                   bulan[index],
                   style: TextStyle(fontSize: 30),
+                ),
+                subtitle: Text("this subtitle form " + bulan[index]),
+                leading: CircleAvatar(
+                  child: Text(
+                    bulan[index][0],
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ),
             );
