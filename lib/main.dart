@@ -9,29 +9,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Stack"),
-        ),
         body: Stack(
           children: [
             Container(
-              color: Colors.red,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      "https://cdn.pixabay.com/photo/2020/10/04/18/13/mountains-5627143_1280.jpg"),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+              // color: Colors.red,
             ),
             Positioned(
-              right: 40,
-              top: 20,
-              child: Container(
-                width: 300,
-                height: 400,
-                color: Colors.blue,
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 130,
-                height: 130,
-                color: Colors.amber,
+              right: 60,
+              top: 130,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "Jam 12.00",
+                    style: TextStyle(color: Colors.white, fontSize: 40),
+                  ),
+                  Text(
+                    "MALAM",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ],
               ),
             ),
           ],
