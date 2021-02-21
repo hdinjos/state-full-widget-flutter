@@ -9,51 +9,81 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          toolbarOpacity: 0.5,
-          elevation: 0,
-          // centerTitle: true,
-          brightness: Brightness.dark,
-          titleSpacing: -2,
-          // backgroundColor: Colors.deepPurple,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.yellow,
-                    Colors.pink,
-                    Colors.cyan,
-                  ]),
+        body: DefaultTabController(
+          length: 2,
+          child: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  expandedHeight: 200,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(
+                      "Belajar Flutter",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    background: Image(
+                        image: AssetImage('assets/images/hunter.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+                SliverPersistentHeader(
+                  pinned: true,
+
+                  // padding: EdgeInsets.all(10),
+                  // sliver: SliverList(
+                  delegate: _SliverAppBarDelegate(
+                      // [
+                      TabBar(
+                    labelColor: Colors.black87,
+                    unselectedLabelColor: Colors.grey,
+                    tabs: [
+                      Tab(icon: Icon(Icons.audiotrack), text: "Song"),
+                      Tab(icon: Icon(Icons.collections), text: "Gallery"),
+                    ],
+                  )
+                      // ],
+                      ),
+                  // ),
+                )
+              ];
+            },
+            body: Center(
+              child: Text("hello good night"),
             ),
           ),
-          // title: Image.network(
-          //     'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTybCniORbVSJJgvqcMaMwxSY4IL6OHxKftgQ&usqp=CAU'),
-          title: Text("Selamat Malam"),
-          leading: Icon(Icons.home),
-          actions: [
-            IconButton(
-              onPressed: () => {
-                print("Halo dunia"),
-              },
-              icon: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-            ),
-            IconButton(
-              onPressed: () => {
-                print("Halo world"),
-              },
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-            )
-          ],
         ),
       ),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
